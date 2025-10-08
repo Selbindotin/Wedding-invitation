@@ -3,49 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wedding Invitation - Alexander & Juliet</title>
+<title>Wedding Invitation - Hariharan & Sangavi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   body {
     margin: 0;
+    font-family: 'Playfair Display', serif;
+    background: #f8f7f9;
     overflow-x: hidden;
-    font-family: 'Great Vibes', cursive;
-    background: #fffafc;
-    color: #444;
+    color: #333;
   }
-
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap');
-
-  /* Background petals */
   canvas#petals {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     pointer-events: none;
     z-index: 1;
   }
 
   /* Card container */
   .card {
+    perspective: 2000px;
     height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    perspective: 1500px;
-    position: relative;
-    overflow: hidden;
+    background: #f7f5f6;
   }
-
   .card-inner {
     position: relative;
     width: 90%;
-    max-width: 600px;
+    max-width: 500px;
     height: 80%;
+    transition: transform 1.5s ease-in-out;
     transform-style: preserve-3d;
-    transition: transform 1s ease-in-out;
-    transform: rotateY(0deg);
+    cursor: pointer;
   }
-
   .card.opened .card-inner {
     transform: rotateY(180deg);
   }
@@ -54,98 +47,111 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    border-radius: 12px;
     backface-visibility: hidden;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    background: linear-gradient(135deg, #fff0f6, #ffe6f0);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    background: #fff;
+    background-image: radial-gradient(circle at top left, #f8f4f9 0%, #fff 100%);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  .front {
-    font-family: 'Great Vibes', cursive;
     text-align: center;
+    padding: 30px;
   }
 
+  .front::before, .back::before {
+    content: "";
+    position: absolute;
+    width: 180px; height: 180px;
+    top: -50px; right: -50px;
+    background: url('https://i.imgur.com/QuTbGdl.png') no-repeat center/contain;
+    opacity: 0.3;
+  }
+  .front::after, .back::after {
+    content: "";
+    position: absolute;
+    width: 180px; height: 180px;
+    bottom: -40px; left: -40px;
+    background: url('https://i.imgur.com/QuTbGdl.png') no-repeat center/contain;
+    opacity: 0.3;
+    transform: rotate(180deg);
+  }
+
+  /* Front cover */
   .front h1 {
-    font-size: 3em;
+    font-family: 'Great Vibes', cursive;
     color: #d6336c;
+    font-size: 3em;
     margin: 0;
   }
-
   .front p {
-    font-size: 1.5em;
-    color: #555;
+    font-size: 1.2em;
+    color: #666;
   }
 
+  /* Back side */
   .back {
     transform: rotateY(180deg);
-    font-family: 'Playfair Display', serif;
-    padding: 20px;
-    background: linear-gradient(135deg, #fff, #ffeef4);
   }
-
-  .details {
-    text-align: center;
-    font-size: 1.1em;
-  }
-
-  .details h2 {
+  .back h2 {
     font-family: 'Great Vibes', cursive;
-    color: #d6336c;
     font-size: 2.5em;
-    margin-bottom: 0.2em;
+    color: #d6336c;
+    margin-bottom: 10px;
   }
-
-  .photo {
-    width: 100%;
-    text-align: center;
-    margin: 20px 0;
+  .details {
+    font-size: 1em;
+    color: #444;
+    line-height: 1.6em;
   }
-
-  .photo img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  .maps {
+    margin-top: 20px;
   }
-
   .maps a {
     display: block;
+    margin: 10px auto;
     text-decoration: none;
     color: #fff;
     background: #d6336c;
     padding: 10px 20px;
-    margin: 10px auto;
-    border-radius: 10px;
+    border-radius: 8px;
     width: fit-content;
-    transition: 0.3s;
+    transition: background 0.3s;
   }
-
   .maps a:hover {
     background: #b52e5c;
   }
 
-  audio {
-    display: none;
+  .photo {
+    margin: 20px 0;
+  }
+  .photo img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
 
-  /* Scroll prompt */
   .scroll-hint {
     position: absolute;
     bottom: 20px;
     text-align: center;
-    animation: bounce 1.5s infinite;
     color: #d6336c;
-    font-size: 1.2em;
+    animation: bounce 1.5s infinite;
   }
-
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @media (max-width: 600px) {
+    .front h1 { font-size: 2.2em; }
+    .back h2 { font-size: 2em; }
+    .photo img { width: 110px; height: 110px; }
   }
 </style>
 </head>
@@ -155,30 +161,30 @@
 
 <div class="card" id="weddingCard">
   <div class="card-inner">
+    <!-- Cover Page -->
     <div class="front">
-      <h1>Alexander & Juliet</h1>
-      <p>Together with their families</p>
-      <p>Request the honor of your presence</p>
-      <p>At their wedding celebration</p>
-      <div class="scroll-hint">▼ Scroll to open ▼</div>
+      <h1>Hariharan & Sangavi</h1>
+      <p>Invite you to celebrate</p>
+      <p>their wedding</p>
+      <div class="scroll-hint">💌 Tap or Scroll to open</div>
     </div>
+
+    <!-- Inside Page -->
     <div class="back">
+      <h2>Hariharan & Sangavi</h2>
       <div class="details">
-        <h2>Alexander & Juliet</h2>
-        <p><strong>Wedding Day:</strong> Saturday, 26 December 2026</p>
-        <p><strong>Time:</strong> 10:30 AM</p>
-        <p><strong>Ceremony:</strong> St. Catherine’s Church</p>
-        <p><strong>Reception:</strong> The Grand Hall</p>
+        <p><strong>Wedding Date:</strong> Friday, 20 October 2023</p>
+        <p><strong>Time:</strong> 6:00 AM</p>
+        <p><strong>Venue:</strong> Tamilnadu Tourism Beach Resort, Mahabalipuram</p>
+        <p><strong>Reception:</strong> 6:00 PM</p>
       </div>
-
       <div class="photo">
-        <img src="https://i.imgur.com/ijvD1WY.jpg" alt="Groom">
-        <img src="https://i.imgur.com/yl8A2uK.jpg" alt="Bride">
+        <img src="https://i.imgur.com/lhL8Cba.png" alt="Groom">
+        <img src="https://i.imgur.com/1C4VkD1.png" alt="Bride">
       </div>
-
       <div class="maps">
-        <a href="https://maps.google.com?q=St+Catherine’s+Church" target="_blank">View Church Location</a>
-        <a href="https://maps.google.com?q=The+Grand+Hall" target="_blank">View Reception Location</a>
+        <a href="https://maps.google.com?q=Tamilnadu+Tourism+Beach+Resort+Mahabalipuram" target="_blank">📍 View Ceremony Location</a>
+        <a href="https://maps.google.com?q=Reception+Hall+Mahabalipuram" target="_blank">📍 View Reception Location</a>
       </div>
     </div>
   </div>
@@ -189,17 +195,18 @@
 </audio>
 
 <script>
-  // Scroll-based open animation
+  // Card opening effect
+  const card = document.getElementById("weddingCard");
   window.addEventListener("scroll", () => {
-    const card = document.getElementById("weddingCard");
-    const scrollY = window.scrollY;
-    if (scrollY > 100) card.classList.add("opened");
-    else card.classList.remove("opened");
+    if (window.scrollY > 50) card.classList.add("opened");
+  });
+  card.addEventListener("click", () => {
+    card.classList.toggle("opened");
   });
 
-  // Flower petals falling
-  const canvas = document.getElementById('petals');
-  const ctx = canvas.getContext('2d');
+  // Falling petals
+  const canvas = document.getElementById("petals");
+  const ctx = canvas.getContext("2d");
   let petals = [];
   const petalCount = 25;
 
@@ -207,19 +214,17 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
-  window.addEventListener('resize', resize);
+  window.addEventListener("resize", resize);
   resize();
 
   class Petal {
-    constructor() {
-      this.reset();
-    }
+    constructor() { this.reset(); }
     reset() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * -canvas.height;
-      this.size = 10 + Math.random() * 10;
+      this.size = 8 + Math.random() * 10;
       this.speed = 1 + Math.random() * 2;
-      this.drift = Math.random() * 2 - 1;
+      this.drift = Math.random() * 1 - 0.5;
     }
     update() {
       this.y += this.speed;
@@ -228,23 +233,20 @@
     }
     draw() {
       ctx.beginPath();
-      ctx.fillStyle = "rgba(255,192,203,0.8)";
+      ctx.fillStyle = "rgba(255,182,193,0.8)";
       ctx.ellipse(this.x, this.y, this.size / 2, this.size, 0, 0, 2 * Math.PI);
       ctx.fill();
     }
   }
 
   for (let i = 0; i < petalCount; i++) petals.push(new Petal());
-
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    petals.forEach(p => {
-      p.update();
-      p.draw();
-    });
+    petals.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(animate);
   }
   animate();
 </script>
+
 </body>
 </html>
