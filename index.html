@@ -235,7 +235,7 @@ body{
     stage.classList.add('open');
     document.querySelector('.hint').style.opacity='0';
   }
-  stage.addEventListener('touchstart', openCard);
+  stage.addEventListener('click', openCard);
   window.addEventListener('keydown', e=>{
     if(e.code==='Space'||e.key===' ') openCard();
   });
