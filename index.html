@@ -42,32 +42,30 @@
       background:rgba(255,255,255,0.3);
       transition:transform 1s ease;
     }
-    .card{
+
+    /* Card halves stacked vertically */
     .card {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column; /* stack vertically */
-}
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column; /* vertical stack */
+    }
 
-.half {
-    width: 100%;       /* take full width of card */
-    height: 50%;       /* each half takes half height */
-    padding: 48px 44px;
-    display: flex;
-    flex-direction: column; /* optional, if you want content inside stacked vertically */
-    justify-content: center;
-    align-items: center;
-    backface-visibility: hidden;
-    transition: transform 1s cubic-bezier(.2,.9,.25,1);
-    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
-}
+    .half {
+      width: 100%;
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px 44px;
+      backface-visibility: hidden;
+      transition: transform 1s cubic-bezier(.2,.9,.25,1);
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    }
 
-/* You may not need transform-origin for vertical stacking, 
-   but if needed, you can adjust accordingly */
-.half.left { transform-origin: top center; }
-.half.right { transform-origin: bottom center; }
-
+    .half.left { transform-origin: top center; }
+    .half.right { transform-origin: bottom center; }
 
     .monogram{
       font-family:'Playfair Display',serif;
@@ -76,29 +74,15 @@
       margin-bottom:4px;
       text-shadow:0 2px 0 rgba(255,255,255,0.6);
     }
-    .subtle{
-      font-size:14px;
-      color:#8b776c;
-      margin-bottom:18px;
-    }
-    .names{
-      font-family:'Playfair Display',serif;
-      font-size:34px;
-      color:#5b4340;
-      text-align:center;
-      margin-bottom:12px;
-    }
-    .invite-line{
-      font-size:18px;
-      text-align:center;
-      max-width:86%;
-    }
+    .subtle{ font-size:14px; color:#8b776c; margin-bottom:18px; }
+    .names{ font-family:'Playfair Display',serif; font-size:34px; color:#5b4340; text-align:center; margin-bottom:12px; }
+    .invite-line{ font-size:18px; text-align:center; max-width:86%; }
 
     .inner{
       position:absolute;
       inset:0;
       display:flex;
-      flex-direction:raw;
+      flex-direction:column; /* vertical */
       align-items:center;
       justify-content:center;
       padding:56px 60px;
@@ -124,18 +108,14 @@
     .when,.where{font-size:15px;margin:6px 0;color:#5f4c47;}
     .meta{font-weight:600;}
     .locations{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:14px;}
-    .loc{
-      display:flex;align-items:center;gap:8px;
-      padding:10px 14px;border-radius:10px;
-      border:1px solid rgba(90,70,60,0.06);
-      background:rgba(255,255,255,0.6);
-    }
-    .loc svg{width:18px;height:18px;opacity:.9}
+    .loc{ display:flex;align-items:center;gap:8px; padding:10px 14px; border-radius:10px; border:1px solid rgba(90,70,60,0.06); background:rgba(255,255,255,0.6); }
+    .loc svg{width:18px;height:18px;opacity:.9;}
     .loc a{color:#5b4542;text-decoration:none;font-size:14px;}
 
-    .stage.open .half.left{transform:rotateX(-160deg);}
-    .stage.open .half.right{transform:rotateX(160deg);}
-    .stage.open .inner{opacity:1;transform:translateY(0);pointer-events:auto;}
+    /* Vertical flip animation */
+    .stage.open .half.left{ transform: rotateX(-180deg); }
+    .stage.open .half.right{ transform: rotateX(180deg); }
+    .stage.open .inner{ opacity:1; transform:translateY(0); pointer-events:auto; }
 
     .hint{
       position:absolute;
@@ -149,6 +129,7 @@
       padding:8px 12px;
       border-radius:999px;
     }
+
     @media(max-width:720px){
       .stage{height:820px;}
       .half{padding:28px 20px;}
