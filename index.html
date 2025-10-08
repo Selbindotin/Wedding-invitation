@@ -1,259 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wedding Invitation - Hariharan & Sangavi</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #d4af37;
-    --dark: #2b1d0e;
-    --light: #fffdf8;
-  }
-  body {
-    margin: 0;
-    font-family: 'Playfair Display', serif;
-    background: var(--light);
-    overflow-x: hidden;
-    color: var(--dark);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation — Alexander & Juliet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#f7efe6;
+      --bg2:#fffdfc;
+      --accent:#c99f86;
+      --muted:#7b6d65;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;scroll-behavior:smooth;}
+    body{
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 24px;
+    }
 
-  canvas#petals {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 1;
-  }
+    .stage{
+      width:100%;
+      max-width:900px;
+      height:640px;
+      perspective:1400px;
+      position:relative;
+    }
+    .card-wrap{
+      width:100%;
+      height:100%;
+      position:relative;
+      transform-style:preserve-3d;
+      border-radius:18px;
+      box-shadow:0 20px 60px rgba(40,30,20,0.12);
+      overflow:hidden;
+      background:rgba(255,255,255,0.3);
+      transition:transform 1s ease;
+    }
+    .card{
+      position:absolute;
+      inset:0;
+      display:flex;
+    }
+    .half{
+      width:50%;
+      height:100%;
+      padding:48px 44px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      backface-visibility:hidden;
+      transition:transform 1s cubic-bezier(.2,.9,.25,1);
+      background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.7));
+    }
+    .half.left{transform-origin:left center;}
+    .half.right{transform-origin:right center;}
 
-  /* Card structure */
-  .card {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 2000px;
-    background: radial-gradient(circle at center, #fffaf0 0%, #f5efe2 100%);
-  }
-  .card-inner {
-    position: relative;
-    width: 90%;
-    max-width: 520px;
-    height: 80%;
-    transition: transform 1.5s ease-in-out;
-    transform-style: preserve-3d;
-    cursor: pointer;
-  }
-  .card.opened .card-inner {
-    transform: rotateY(180deg);
-  }
+    .monogram{
+      font-family:'Playfair Display',serif;
+      font-size:56px;
+      color:var(--accent);
+      margin-bottom:4px;
+      text-shadow:0 2px 0 rgba(255,255,255,0.6);
+    }
+    .subtle{
+      font-size:14px;
+      color:#8b776c;
+      margin-bottom:18px;
+    }
+    .names{
+      font-family:'Playfair Display',serif;
+      font-size:34px;
+      color:#5b4340;
+      text-align:center;
+      margin-bottom:12px;
+    }
+    .invite-line{
+      font-size:18px;
+      text-align:center;
+      max-width:86%;
+    }
 
-  .front, .back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 18px;
-    backface-visibility: hidden;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    border: 2px solid var(--gold);
-    background: linear-gradient(145deg, #fffdf8 0%, #fef6e4 100%);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 20px;
-    position: relative;
-  }
+    .inner{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:56px 60px;
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .9s ease, transform .9s ease;
+      pointer-events:none;
+    }
+    .details{
+      max-width:720px;
+      background:rgba(255,255,255,0.9);
+      border-radius:12px;
+      padding:26px 28px;
+      box-shadow:0 10px 30px rgba(30,20,10,0.06);
+      text-align:center;
+      border:1px solid rgba(200,160,130,0.12);
+    }
+    .details h3{
+      margin-bottom:8px;
+      font-family:'Playfair Display',serif;
+      color:#533c3a;
+    }
+    .when,.where{font-size:15px;margin:6px 0;color:#5f4c47;}
+    .meta{font-weight:600;}
+    .locations{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:14px;}
+    .loc{
+      display:flex;align-items:center;gap:8px;
+      padding:10px 14px;border-radius:10px;
+      border:1px solid rgba(90,70,60,0.06);
+      background:rgba(255,255,255,0.6);
+    }
+    .loc svg{width:18px;height:18px;opacity:.9}
+    .loc a{color:#5b4542;text-decoration:none;font-size:14px;}
 
-  .front::before, .back::before {
-    content: "";
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 200px; height: 200px;
-    background: url('https://i.imgur.com/d6J4g5Y.png') no-repeat center/contain;
-    opacity: 0.2;
-  }
-  .front::after, .back::after {
-    content: "";
-    position: absolute;
-    bottom: -60px; left: -60px;
-    width: 200px; height: 200px;
-    background: url('https://i.imgur.com/d6J4g5Y.png') no-repeat center/contain;
-    opacity: 0.2;
-    transform: rotate(180deg);
-  }
+    .stage.open .half.left{transform:rotateY(-160deg);}
+    .stage.open .half.right{transform:rotateY(160deg);}
+    .stage.open .inner{opacity:1;transform:translateY(0);pointer-events:auto;}
 
-  /* FRONT */
-  .front h1 {
-    font-family: 'Great Vibes', cursive;
-    color: var(--gold);
-    font-size: 3.2em;
-    margin-bottom: 0.2em;
-    text-shadow: 0 0 8px rgba(212,175,55,0.4);
-  }
-  .front p {
-    font-size: 1.2em;
-    color: #555;
-  }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: 15px;
-    color: var(--gold);
-    font-size: 1em;
-    animation: bounce 1.5s infinite;
-  }
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-
-  /* BACK */
-  .back {
-    transform: rotateY(180deg);
-    padding-top: 20px;
-  }
-  .back h2 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.8em;
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
-  .details {
-    font-size: 1.05em;
-    color: #333;
-    line-height: 1.7em;
-    margin-bottom: 20px;
-  }
-  .photo img {
-    width: 130px; height: 130px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--gold);
-    margin: 0 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-  }
-
-  .maps a {
-    display: block;
-    background: var(--gold);
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 10px;
-    margin: 8px auto;
-    width: fit-content;
-    font-size: 0.95em;
-    transition: all 0.3s;
-  }
-  .maps a:hover {
-    background: #b99627;
-    transform: scale(1.05);
-  }
-
-  @media(max-width:600px){
-    .front h1{font-size:2.5em;}
-    .back h2{font-size:2.3em;}
-  }
-</style>
+    .hint{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:18px;
+      font-size:13px;
+      color:#7b6a64;
+      opacity:.9;
+      background:rgba(255,255,255,0.6);
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    @media(max-width:720px){
+      .stage{height:820px;}
+      .half{padding:28px 20px;}
+      .monogram{font-size:44px;}
+      .names{font-size:26px;}
+    }
+  </style>
 </head>
 <body>
-
-<canvas id="petals"></canvas>
-
-<div class="card" id="weddingCard">
-  <div class="card-inner">
-    <!-- FRONT COVER -->
-    <div class="front">
-      <h1>Hariharan & Sangavi</h1>
-      <p>Invite you to celebrate their wedding</p>
-      <p>Friday, 20 October 2023</p>
-      <p style="font-size:0.95em;">Scroll or Tap to Open 💌</p>
-      <div class="scroll-hint">▼</div>
-    </div>
-
-    <!-- INNER PAGE -->
-    <div class="back">
-      <h2>Hariharan & Sangavi</h2>
-      <div class="details">
-        <p><strong>Wedding Day:</strong> Friday, 20 October 2023</p>
-        <p><strong>Time:</strong> 6:00 AM</p>
-        <p><strong>Venue:</strong> Tamilnadu Tourism Beach Resort, Mahabalipuram</p>
-        <p><strong>Reception:</strong> 6:00 PM</p>
-      </div>
-
-      <div class="photo">
-        <img src="https://i.imgur.com/lhL8Cba.png" alt="Groom">
-        <img src="https://i.imgur.com/1C4VkD1.png" alt="Bride">
-      </div>
-
-      <div class="maps">
-        <a href="https://maps.google.com?q=Tamilnadu+Tourism+Beach+Resort+Mahabalipuram" target="_blank">📍 View Ceremony Location</a>
-        <a href="https://maps.google.com?q=Reception+Hall+Mahabalipuram" target="_blank">📍 View Reception Location</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2021/08/08/audio_7a8a3eacb8.mp3" type="audio/mp3">
-</audio>
-
-<script>
-  // Open card on click/scroll
-  const card = document.getElementById("weddingCard");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) card.classList.add("opened");
-  });
-  card.addEventListener("click", () => {
-    card.classList.toggle("opened");
-  });
-
-  // Petals animation
-  const canvas = document.getElementById("petals");
-  const ctx = canvas.getContext("2d");
-  let petals = [];
-  const petalCount = 25;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resize);
-  resize();
-
-  class Petal {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * -canvas.height;
-      this.size = 10 + Math.random() * 12;
-      this.speed = 1 + Math.random() * 2;
-      this.drift = Math.random() * 1 - 0.5;
-    }
-    update() {
-      this.y += this.speed;
-      this.x += this.drift;
-      if (this.y > canvas.height) this.reset();
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.fillStyle = "rgba(212,175,55,0.5)";
-      ctx.ellipse(this.x, this.y, this.size / 2, this.size, 0, 0, 2 * Math.PI);
-      ctx.fill();
-    }
-  }
-
-  for (let i = 0; i < petalCount; i++) petals.push(new Petal());
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    petals.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(animate);
-  }
-  animate();
-</script>
-</body>
-</html>
+  <div class="stage" id="stage">
+    <div class="card-wrap">
+      <div class="card">
+        <div class="half left">
+          <div style="text-align:center;">
+            <div class="monogram">A &amp; J</div>
+            <div class="subtle">Together with their families</div>
+            <div class="names">Alexander<br>&amp;<br>Juliet</div>
+            <div class="invite-line">
+              Request the honour of your presence as they begin their new life together
+            </div>
+          </div>
+        </div>
+        <div class="half right">
+          <div style="text-align:center;">
+            <div style="
