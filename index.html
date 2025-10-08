@@ -4,15 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wedding Invitation - Hariharan & Sangavi</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --gold: #d4af37;
+    --dark: #2b1d0e;
+    --light: #fffdf8;
+  }
   body {
     margin: 0;
     font-family: 'Playfair Display', serif;
-    background: #f8f7f9;
+    background: var(--light);
     overflow-x: hidden;
-    color: #333;
+    color: var(--dark);
   }
+
   canvas#petals {
     position: fixed;
     top: 0; left: 0;
@@ -21,19 +27,19 @@
     z-index: 1;
   }
 
-  /* Card container */
+  /* Card structure */
   .card {
-    perspective: 2000px;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f7f5f6;
+    perspective: 2000px;
+    background: radial-gradient(circle at center, #fffaf0 0%, #f5efe2 100%);
   }
   .card-inner {
     position: relative;
     width: 90%;
-    max-width: 500px;
+    max-width: 520px;
     height: 80%;
     transition: transform 1.5s ease-in-out;
     transform-style: preserve-3d;
@@ -47,100 +53,57 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 12px;
+    border-radius: 18px;
     backface-visibility: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    background: #fff;
-    background-image: radial-gradient(circle at top left, #f8f4f9 0%, #fff 100%);
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border: 2px solid var(--gold);
+    background: linear-gradient(145deg, #fffdf8 0%, #fef6e4 100%);
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 30px;
+    padding: 30px 20px;
+    position: relative;
   }
 
   .front::before, .back::before {
     content: "";
     position: absolute;
-    width: 180px; height: 180px;
-    top: -50px; right: -50px;
-    background: url('https://i.imgur.com/QuTbGdl.png') no-repeat center/contain;
-    opacity: 0.3;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: url('https://i.imgur.com/d6J4g5Y.png') no-repeat center/contain;
+    opacity: 0.2;
   }
   .front::after, .back::after {
     content: "";
     position: absolute;
-    width: 180px; height: 180px;
-    bottom: -40px; left: -40px;
-    background: url('https://i.imgur.com/QuTbGdl.png') no-repeat center/contain;
-    opacity: 0.3;
+    bottom: -60px; left: -60px;
+    width: 200px; height: 200px;
+    background: url('https://i.imgur.com/d6J4g5Y.png') no-repeat center/contain;
+    opacity: 0.2;
     transform: rotate(180deg);
   }
 
-  /* Front cover */
+  /* FRONT */
   .front h1 {
     font-family: 'Great Vibes', cursive;
-    color: #d6336c;
-    font-size: 3em;
-    margin: 0;
+    color: var(--gold);
+    font-size: 3.2em;
+    margin-bottom: 0.2em;
+    text-shadow: 0 0 8px rgba(212,175,55,0.4);
   }
   .front p {
     font-size: 1.2em;
-    color: #666;
-  }
-
-  /* Back side */
-  .back {
-    transform: rotateY(180deg);
-  }
-  .back h2 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.5em;
-    color: #d6336c;
-    margin-bottom: 10px;
-  }
-  .details {
-    font-size: 1em;
-    color: #444;
-    line-height: 1.6em;
-  }
-  .maps {
-    margin-top: 20px;
-  }
-  .maps a {
-    display: block;
-    margin: 10px auto;
-    text-decoration: none;
-    color: #fff;
-    background: #d6336c;
-    padding: 10px 20px;
-    border-radius: 8px;
-    width: fit-content;
-    transition: background 0.3s;
-  }
-  .maps a:hover {
-    background: #b52e5c;
-  }
-
-  .photo {
-    margin: 20px 0;
-  }
-  .photo img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    color: #555;
   }
 
   .scroll-hint {
     position: absolute;
-    bottom: 20px;
-    text-align: center;
-    color: #d6336c;
+    bottom: 15px;
+    color: var(--gold);
+    font-size: 1em;
     animation: bounce 1.5s infinite;
   }
   @keyframes bounce {
@@ -148,10 +111,52 @@
     50% { transform: translateY(-8px); }
   }
 
-  @media (max-width: 600px) {
-    .front h1 { font-size: 2.2em; }
-    .back h2 { font-size: 2em; }
-    .photo img { width: 110px; height: 110px; }
+  /* BACK */
+  .back {
+    transform: rotateY(180deg);
+    padding-top: 20px;
+  }
+  .back h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8em;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .details {
+    font-size: 1.05em;
+    color: #333;
+    line-height: 1.7em;
+    margin-bottom: 20px;
+  }
+  .photo img {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold);
+    margin: 0 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+
+  .maps a {
+    display: block;
+    background: var(--gold);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 8px auto;
+    width: fit-content;
+    font-size: 0.95em;
+    transition: all 0.3s;
+  }
+  .maps a:hover {
+    background: #b99627;
+    transform: scale(1.05);
+  }
+
+  @media(max-width:600px){
+    .front h1{font-size:2.5em;}
+    .back h2{font-size:2.3em;}
   }
 </style>
 </head>
@@ -161,27 +166,30 @@
 
 <div class="card" id="weddingCard">
   <div class="card-inner">
-    <!-- Cover Page -->
+    <!-- FRONT COVER -->
     <div class="front">
       <h1>Hariharan & Sangavi</h1>
-      <p>Invite you to celebrate</p>
-      <p>their wedding</p>
-      <div class="scroll-hint">💌 Tap or Scroll to open</div>
+      <p>Invite you to celebrate their wedding</p>
+      <p>Friday, 20 October 2023</p>
+      <p style="font-size:0.95em;">Scroll or Tap to Open 💌</p>
+      <div class="scroll-hint">▼</div>
     </div>
 
-    <!-- Inside Page -->
+    <!-- INNER PAGE -->
     <div class="back">
       <h2>Hariharan & Sangavi</h2>
       <div class="details">
-        <p><strong>Wedding Date:</strong> Friday, 20 October 2023</p>
+        <p><strong>Wedding Day:</strong> Friday, 20 October 2023</p>
         <p><strong>Time:</strong> 6:00 AM</p>
         <p><strong>Venue:</strong> Tamilnadu Tourism Beach Resort, Mahabalipuram</p>
         <p><strong>Reception:</strong> 6:00 PM</p>
       </div>
+
       <div class="photo">
         <img src="https://i.imgur.com/lhL8Cba.png" alt="Groom">
         <img src="https://i.imgur.com/1C4VkD1.png" alt="Bride">
       </div>
+
       <div class="maps">
         <a href="https://maps.google.com?q=Tamilnadu+Tourism+Beach+Resort+Mahabalipuram" target="_blank">📍 View Ceremony Location</a>
         <a href="https://maps.google.com?q=Reception+Hall+Mahabalipuram" target="_blank">📍 View Reception Location</a>
@@ -195,7 +203,7 @@
 </audio>
 
 <script>
-  // Card opening effect
+  // Open card on click/scroll
   const card = document.getElementById("weddingCard");
   window.addEventListener("scroll", () => {
     if (window.scrollY > 50) card.classList.add("opened");
@@ -204,7 +212,7 @@
     card.classList.toggle("opened");
   });
 
-  // Falling petals
+  // Petals animation
   const canvas = document.getElementById("petals");
   const ctx = canvas.getContext("2d");
   let petals = [];
@@ -222,7 +230,7 @@
     reset() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * -canvas.height;
-      this.size = 8 + Math.random() * 10;
+      this.size = 10 + Math.random() * 12;
       this.speed = 1 + Math.random() * 2;
       this.drift = Math.random() * 1 - 0.5;
     }
@@ -233,7 +241,7 @@
     }
     draw() {
       ctx.beginPath();
-      ctx.fillStyle = "rgba(255,182,193,0.8)";
+      ctx.fillStyle = "rgba(212,175,55,0.5)";
       ctx.ellipse(this.x, this.y, this.size / 2, this.size, 0, 0, 2 * Math.PI);
       ctx.fill();
     }
@@ -247,6 +255,5 @@
   }
   animate();
 </script>
-
 </body>
 </html>
