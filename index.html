@@ -1,244 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Wedding Invitation - Selbin & Maria</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation - Alexander & Juliet</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{
-    font-family:'Inter',sans-serif;
-    background:#fdf9f6;
-    color:#4b3b36;
-    overflow-x:hidden;
-  }
-  header{
-    height:100vh;
-    background:linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.5)),
-               url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1200&q=60') center/cover;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    position:relative;
-  }
-  header h1{
-    font-family:'Playfair Display',serif;
-    font-size:48px;
-    color:#6a4a3a;
-    margin-bottom:10px;
-  }
-  header h2{
-    font-family:'Playfair Display',serif;
-    font-size:22px;
-    color:#9b7b6a;
-  }
-  .scroll-indicator{
-    position:absolute;
-    bottom:30px;
-    font-size:14px;
-    color:#7a6a60;
-    animation:float 2s ease-in-out infinite;
-  }
-  @keyframes float{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(6px);}
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Great Vibes', cursive;
+    background: #fffafc;
+    color: #444;
   }
 
-  section{
-    padding:80px 24px;
-    max-width:900px;
-    margin:0 auto;
-    text-align:center;
-  }
-  section h2{
-    font-family:'Playfair Display',serif;
-    font-size:32px;
-    color:#5e433b;
-    margin-bottom:20px;
-  }
-  section p{
-    max-width:720px;
-    margin:0 auto;
-    font-size:16px;
-    color:#5b4a45;
-    line-height:1.7;
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap');
+
+  /* Background petals */
+  canvas#petals {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
   }
 
-  .photos{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:24px;
-    margin-top:40px;
-  }
-  .photos img{
-    width:100%;
-    border-radius:20px;
-    box-shadow:0 6px 16px rgba(0,0,0,0.1);
-  }
-  @media(min-width:700px){
-    .photos{grid-template-columns:repeat(3,1fr);}
+  /* Card container */
+  .card {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    perspective: 1500px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .details{
-    margin-top:60px;
-    background:#fffdfc;
-    border-radius:18px;
-    box-shadow:0 8px 28px rgba(0,0,0,0.08);
-    padding:30px;
-  }
-  .details h3{
-    font-family:'Playfair Display',serif;
-    font-size:24px;
-    color:#5e433b;
-    margin-bottom:12px;
-  }
-  .detail-item{margin:8px 0;font-size:15px;}
-  .map-links{margin-top:20px;}
-  .map-links a{
-    display:inline-block;
-    background:#d9b8a5;
-    color:#fff;
-    padding:10px 16px;
-    border-radius:8px;
-    text-decoration:none;
-    margin:6px;
-    font-size:14px;
-    transition:background .3s;
-  }
-  .map-links a:hover{background:#b6927d;}
-
-  footer{
-    padding:60px 20px;
-    text-align:center;
-    background:#f4ebe5;
-    font-size:14px;
-    color:#6b5a53;
+  .card-inner {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    height: 80%;
+    transform-style: preserve-3d;
+    transition: transform 1s ease-in-out;
+    transform: rotateY(0deg);
   }
 
-  /* Fade-up animations */
-  .fade-up{
-    opacity:0;
-    transform:translateY(30px);
-    transition:all 1.2s ease;
-  }
-  .fade-up.visible{
-    opacity:1;
-    transform:translateY(0);
+  .card.opened .card-inner {
+    transform: rotateY(180deg);
   }
 
-  /* Petals animation */
-  .petal{
-    position:fixed;
-    top:-10vh;
-    width:25px;
-    height:25px;
-    background:rgba(255,182,193,0.8);
-    border-radius:50% 50% 50% 0;
-    animation:fall 10s linear infinite;
-    z-index:999;
-    pointer-events:none;
+  .front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #fff0f6, #ffe6f0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-  @keyframes fall{
-    0%{transform:translateY(0) rotate(0deg);}
-    100%{transform:translateY(110vh) rotate(360deg);}
+
+  .front {
+    font-family: 'Great Vibes', cursive;
+    text-align: center;
+  }
+
+  .front h1 {
+    font-size: 3em;
+    color: #d6336c;
+    margin: 0;
+  }
+
+  .front p {
+    font-size: 1.5em;
+    color: #555;
+  }
+
+  .back {
+    transform: rotateY(180deg);
+    font-family: 'Playfair Display', serif;
+    padding: 20px;
+    background: linear-gradient(135deg, #fff, #ffeef4);
+  }
+
+  .details {
+    text-align: center;
+    font-size: 1.1em;
+  }
+
+  .details h2 {
+    font-family: 'Great Vibes', cursive;
+    color: #d6336c;
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+  }
+
+  .photo {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .photo img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+
+  .maps a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    background: #d6336c;
+    padding: 10px 20px;
+    margin: 10px auto;
+    border-radius: 10px;
+    width: fit-content;
+    transition: 0.3s;
+  }
+
+  .maps a:hover {
+    background: #b52e5c;
+  }
+
+  audio {
+    display: none;
+  }
+
+  /* Scroll prompt */
+  .scroll-hint {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    animation: bounce 1.5s infinite;
+    color: #d6336c;
+    font-size: 1.2em;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 </style>
 </head>
-
 <body>
-<!-- Background Music -->
-<audio id="bg-music" autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2023/03/13/audio_7df3d36b9a.mp3?filename=wedding-instrumental-14091.mp3" type="audio/mpeg">
-</audio>
 
-<!-- Header -->
-<header>
-  <h1>Selbin & Maria</h1>
-  <h2>Are Getting Married</h2>
-  <div class="scroll-indicator">Scroll to open the invitation ↓</div>
-</header>
+<canvas id="petals"></canvas>
 
-<!-- Section 1 -->
-<section class="fade-up">
-  <h2>With joyful hearts</h2>
-  <p>
-    Together with their families, <strong>Selbin & Maria</strong> invite you to celebrate
-    the beginning of their forever. Your presence will make their special day truly complete.
-  </p>
-  <div class="photos">
-    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=60" alt="Bride">
-    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=60" alt="Groom">
-    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=60" alt="Together">
-  </div>
-</section>
+<div class="card" id="weddingCard">
+  <div class="card-inner">
+    <div class="front">
+      <h1>Alexander & Juliet</h1>
+      <p>Together with their families</p>
+      <p>Request the honor of your presence</p>
+      <p>At their wedding celebration</p>
+      <div class="scroll-hint">▼ Scroll to open ▼</div>
+    </div>
+    <div class="back">
+      <div class="details">
+        <h2>Alexander & Juliet</h2>
+        <p><strong>Wedding Day:</strong> Saturday, 26 December 2026</p>
+        <p><strong>Time:</strong> 10:30 AM</p>
+        <p><strong>Ceremony:</strong> St. Catherine’s Church</p>
+        <p><strong>Reception:</strong> The Grand Hall</p>
+      </div>
 
-<!-- Section 2 -->
-<section class="fade-up">
-  <h2>The Wedding Day</h2>
-  <div class="details">
-    <h3>Saturday, 14th February 2026</h3>
-    <div class="detail-item">Ceremony: 10:00 AM at St. Mary’s Church</div>
-    <div class="detail-item">Reception: 12:00 PM at Rose Garden Convention Hall</div>
-    <div class="detail-item">Dress Code: Elegant Traditional</div>
-    <div class="map-links">
-      <a href="https://www.google.com/maps/place/St.+Mary's+Church" target="_blank">Church Location</a>
-      <a href="https://www.google.com/maps/place/Rose+Garden+Hall" target="_blank">Reception Location</a>
+      <div class="photo">
+        <img src="https://i.imgur.com/ijvD1WY.jpg" alt="Groom">
+        <img src="https://i.imgur.com/yl8A2uK.jpg" alt="Bride">
+      </div>
+
+      <div class="maps">
+        <a href="https://maps.google.com?q=St+Catherine’s+Church" target="_blank">View Church Location</a>
+        <a href="https://maps.google.com?q=The+Grand+Hall" target="_blank">View Reception Location</a>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- Section 3 -->
-<section class="fade-up">
-  <h2>Our Story</h2>
-  <p>
-    From the first meeting to countless memories, this journey has been blessed with love, laughter,
-    and faith. As they take the next step, Selbin & Maria invite you to witness their promise of forever.
-  </p>
-  <div class="photos">
-    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=60" alt="Couple">
-    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=60" alt="Memories">
-  </div>
-</section>
-
-<footer>
-  With love,<br><strong>Selbin & Maria</strong><br><br>
-  © 2026 Wedding Invitation | Designed with ❤️
-</footer>
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2021/08/08/audio_7a8a3eacb8.mp3" type="audio/mp3">
+</audio>
 
 <script>
-  // Fade-up on scroll
-  const faders=document.querySelectorAll('.fade-up');
-  const appearOptions={threshold:0.2};
-  const appearOnScroll=new IntersectionObserver((entries,observer)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  },appearOptions);
-  faders.forEach(fader=>appearOnScroll.observe(fader));
-
-  // Auto-scroll effect
-  window.addEventListener('load',()=>{
-    setTimeout(()=>window.scrollTo({top:100,behavior:'smooth'}),1000);
+  // Scroll-based open animation
+  window.addEventListener("scroll", () => {
+    const card = document.getElementById("weddingCard");
+    const scrollY = window.scrollY;
+    if (scrollY > 100) card.classList.add("opened");
+    else card.classList.remove("opened");
   });
 
-  // Petal animation
-  const numPetals=20;
-  for(let i=0;i<numPetals;i++){
-    let petal=document.createElement('div');
-    petal.classList.add('petal');
-    petal.style.left=Math.random()*100+'vw';
-    petal.style.animationDuration=8+Math.random()*6+'s';
-    petal.style.opacity=Math.random();
-    petal.style.background=`hsl(${Math.random()*20+340},70%,80%)`;
-    document.body.appendChild(petal);
+  // Flower petals falling
+  const canvas = document.getElementById('petals');
+  const ctx = canvas.getContext('2d');
+  let petals = [];
+  const petalCount = 25;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
   }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Petal {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * -canvas.height;
+      this.size = 10 + Math.random() * 10;
+      this.speed = 1 + Math.random() * 2;
+      this.drift = Math.random() * 2 - 1;
+    }
+    update() {
+      this.y += this.speed;
+      this.x += this.drift;
+      if (this.y > canvas.height) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(255,192,203,0.8)";
+      ctx.ellipse(this.x, this.y, this.size / 2, this.size, 0, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < petalCount; i++) petals.push(new Petal());
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    petals.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
 </script>
 </body>
 </html>
