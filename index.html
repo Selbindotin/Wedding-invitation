@@ -43,24 +43,31 @@
       transition:transform 1s ease;
     }
     .card{
-      position:absolute;
-      inset:0;
-      display:flex;
-    }
-    .half{
-      width:50%;
-      height:100%;
-      padding:48px 44px;
-      display:flex;
-      flex-direction:raw;
-      justify-content:center;
-      align-items:center;
-      backface-visibility:hidden;
-      transition:transform 1s cubic-bezier(.2,.9,.25,1);
-      background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.7));
-    }
-    .half.left{transform-origin:left center;}
-    .half.right{transform-origin:right center;}
+    .card {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column; /* stack vertically */
+}
+
+.half {
+    width: 100%;       /* take full width of card */
+    height: 50%;       /* each half takes half height */
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column; /* optional, if you want content inside stacked vertically */
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    transition: transform 1s cubic-bezier(.2,.9,.25,1);
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+}
+
+/* You may not need transform-origin for vertical stacking, 
+   but if needed, you can adjust accordingly */
+.half.left { transform-origin: top center; }
+.half.right { transform-origin: bottom center; }
+
 
     .monogram{
       font-family:'Playfair Display',serif;
