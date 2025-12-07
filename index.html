@@ -6,159 +6,126 @@
 <title>Selbin & Shalini Wedding</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #8e0038, #d81b60);
-  color: white;
-  text-align: center;
+body{
+  margin:0;
+  background:#b1124d;
+  font-family: "Times New Roman", serif;
 }
 
-.container {
-  max-width: 450px;
-  margin: auto;
-  background: white;
-  color: #8e0038;
-  border-radius: 20px;
-  padding: 25px;
-  margin-top: 40px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+.card{
+  max-width: 420px;
+  background:#fff;
+  margin:40px auto;
+  padding:30px 25px;
+  border-radius:18px;
+  text-align:center;
+  box-shadow:0 0 20px rgba(0,0,0,.4);
 }
 
-.date-box {
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 10px;
+.date{
+  font-size:34px;
+  font-weight:bold;
+  letter-spacing:2px;
 }
 
-.names {
-  font-size: 32px;
-  font-weight: bold;
-  margin: 10px 0;
+.year{
+  font-size:22px;
+  margin-top:-8px;
 }
 
-.and {
-  font-size: 20px;
-  margin: 5px 0;
+.names{
+  font-size:36px;
+  font-weight:bold;
+  margin-top:10px;
 }
 
-.invite {
-  font-size: 18px;
-  margin: 15px 0;
+.and{
+  font-size:22px;
+  margin:8px 0;
 }
 
-.section {
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #ccc;
+.invite{
+  margin:18px 0;
+  font-size:17px;
+  letter-spacing:1px;
 }
 
-.time {
-  font-size: 18px;
-  font-weight: bold;
+.section{
+  margin-top:22px;
 }
 
-.place {
-  font-size: 16px;
-  margin-top: 5px;
+.time{
+  font-weight:bold;
+  font-size:18px;
 }
 
-.map-btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 16px;
-  background: #d81b60;
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-size: 14px;
-  transition: 0.2s;
+.place{
+  margin-top:5px;
+  font-size:16px;
 }
 
-.map-btn:hover {
-  background: #b0154b;
+.location{
+  margin-top:6px;
+  font-size:14px;
 }
 
-.footer {
-  margin-top: 25px;
-  font-size: 14px;
-  color: #666;
+.location a{
+  text-decoration:none;
+  color:#b1124d;
+  font-weight:bold;
 }
 
-.countdown {
-  font-size: 20px;
-  margin-top: 20px;
-  color: #d81b60;
-  font-weight: bold;
+.location a:hover{
+  text-decoration:underline;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
 
-  <div class="date-box">January 10, 2025</div>
+  <div class="date">JANUARY 10</div>
+  <div class="year">2025</div>
 
   <div class="names">Selbin</div>
   <div class="and">&</div>
   <div class="names">Shalini</div>
 
   <div class="invite">
-    Together with our families, we invite you to celebrate our wedding
+    TOGETHER WITH OUR FAMILIES<br>
+    INVITE YOU TO<br>
+    CELEBRATE OUR WEDDING
   </div>
 
-  <!-- CHURCH -->
   <div class="section">
-    <div class="time">Marriage – 10:00 AM</div>
-    <div class="place">St. Sebastian's Church, Kannivayal</div>
+    <div class="place">St. Sebastian's Church</div>
+    <div class="place">Kannivayal</div>
+    <div class="time">AT 10:00 AM</div>
 
-    <!-- GPS BUTTON -->
-    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=St+Sebastian's+Church+Kannivayal" target="_blank">
-      📍 Get Church Location
-    </a>
+    <!-- ✅ LOCATION ADDED ONLY -->
+    <div class="location">
+      📍 <a href="https://www.google.com/maps/search/?api=1&query=St+Sebastian's+Church+Kannivayal" target="_blank">
+      Get Location
+      </a>
+    </div>
   </div>
 
-  <!-- RECEPTION -->
   <div class="section">
-    <div class="time">Reception – 12:30 PM</div>
-    <div class="place">Vyabharabhavan Auditorium, Chittarikkal</div>
+    <div class="place">Vyabharabhavan Auditorium</div>
+    <div class="place">Chittarikkal</div>
+    <div class="time">AT 12:30 PM</div>
+    <div class="place">Reception</div>
 
-    <!-- GPS BUTTON -->
-    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Vyabharabhavan+Auditorium+Chittarikkal" target="_blank">
-      📍 Get Reception Location
-    </a>
-  </div>
-
-  <div class="countdown" id="countdown"></div>
-
-  <div class="footer">
-    We look forward to your presence & blessings ❤️
+    <!-- ✅ LOCATION ADDED ONLY -->
+    <div class="location">
+      📍 <a href="https://www.google.com/maps/search/?api=1&query=Vyabharabhavan+Auditorium+Chittarikkal" target="_blank">
+      Get Location
+      </a>
+    </div>
   </div>
 
 </div>
-
-<script>
-const weddingDate = new Date("January 10, 2025 10:00:00").getTime();
-
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = weddingDate - now;
-
-  if (diff < 0) {
-    document.getElementById("countdown").innerHTML = "🎉 Wedding Day Ongoing! 🎉";
-    return;
-  }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  document.getElementById("countdown").innerHTML =
-    `⏳ ${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds Remaining`;
-}, 1000);
-</script>
 
 </body>
 </html>
