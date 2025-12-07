@@ -1,131 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selbin & Shalini Wedding</title>
+  <meta charset="UTF-8" />
+  <title>Selbin & Shalini - Wedding Locations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<style>
-body{
-  margin:0;
-  background:#b1124d;
-  font-family: "Times New Roman", serif;
-}
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-.card{
-  max-width: 420px;
-  background:#fff;
-  margin:40px auto;
-  padding:30px 25px;
-  border-radius:18px;
-  text-align:center;
-  box-shadow:0 0 20px rgba(0,0,0,.4);
-}
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #ffeaf4 0, #fdf7ff 40%, #f3f0ff 100%);
+      overflow-x: hidden;
+      color: #3b1b2a;
+      position: relative;
+    }
 
-.date{
-  font-size:34px;
-  font-weight:bold;
-  letter-spacing:2px;
-}
+    /* Liquid background blobs */
+    .blob {
+      position: fixed;
+      border-radius: 40% 60% 65% 35%;
+      filter: blur(2px);
+      opacity: 0.55;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: -2;
+      animation: float 22s ease-in-out infinite alternate;
+    }
 
-.year{
-  font-size:22px;
-  margin-top:-8px;
-}
+    .blob:nth-child(1) {
+      width: 420px;
+      height: 420px;
+      top: -120px;
+      left: -120px;
+      background: radial-gradient(circle at 30% 20%, #ff9fbf, #d5679d);
+    }
 
-.names{
-  font-size:36px;
-  font-weight:bold;
-  margin-top:10px;
-}
+    .blob:nth-child(2) {
+      width: 420px;
+      height: 420px;
+      bottom: -160px;
+      right: -120px;
+      background: radial-gradient(circle at 70% 80%, #ffd6e8, #c06fe3);
+      animation-duration: 26s;
+    }
 
-.and{
-  font-size:22px;
-  margin:8px 0;
-}
+    .blob:nth-child(3) {
+      width: 360px;
+      height: 360px;
+      top: 40%;
+      left: 55%;
+      background: radial-gradient(circle at 30% 70%, #ffe8f3, #ffb6c9);
+      animation-duration: 30s;
+    }
 
-.invite{
-  margin:18px 0;
-  font-size:17px;
-  letter-spacing:1px;
-}
+    @keyframes float {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(30px, -10px, 0) scale(1.05);
+      }
+      100% {
+        transform: translate3d(-25px, 20px, 0) scale(1.02) rotate(3deg);
+      }
+    }
 
-.section{
-  margin-top:22px;
-}
+    /* Glass card */
+    .card {
+      width: 95%;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 24px;
+      padding: 24px 20px 26px;
+      box-shadow: 0 18px 45px rgba(116, 63, 92, 0.20);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px) saturate(140%);
+      position: relative;
+    }
 
-.time{
-  font-weight:bold;
-  font-size:18px;
-}
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid rgba(217, 130, 180, 0.25);
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+    }
 
-.place{
-  margin-top:5px;
-  font-size:16px;
-}
+    .accent-strip {
+      position: absolute;
+      left: 16px;
+      top: 10px;
+      bottom: 10px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #7e123b, #b52b6a);
+      opacity: 0.9;
+    }
 
-.location{
-  margin-top:6px;
-  font-size:14px;
-}
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+      padding: 0 12px;
+    }
 
-.location a{
-  text-decoration:none;
-  color:#b1124d;
-  font-weight:bold;
-}
+    .header small {
+      display: block;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.68rem;
+      margin-bottom: 4px;
+      color: #7a5168;
+    }
 
-.location a:hover{
-  text-decoration:underline;
-}
-</style>
+    .names {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.06em;
+      text-transform: capitalize;
+      margin-bottom: 2px;
+    }
+
+    .ampersand {
+      font-size: 1.7rem;
+      margin: 0 6px;
+      color: #9b1b53;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9b5a7a;
+      margin-bottom: 6px;
+    }
+
+    .date-tag {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(152, 57, 100, 0.12);
+      background: linear-gradient(135deg, rgba(255, 238, 246, 0.9), rgba(255, 255, 255, 0.9));
+      font-size: 0.7rem;
+      gap: 1px;
+      margin-top: 6px;
+    }
+
+    .date-tag span:first-child {
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #7a3b57;
+    }
+
+    .date-tag span:last-child {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #9b1b53;
+    }
+
+    /* Venue section */
+    .venues {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(170, 105, 137, 0.32);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .venue {
+      padding: 10px 12px 12px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 246, 252, 0.9), rgba(245, 228, 245, 0.9));
+      border: 1px solid rgba(196, 139, 169, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .venue::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      right: -60px;
+      top: -60px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9), rgba(223, 155, 189, 0.1));
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .venue-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.19em;
+      color: #924063;
+      margin-bottom: 4px;
+    }
+
+    .time {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #681333;
+      margin-bottom: 2px;
+    }
+
+    .place {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #3b1b2a;
+    }
+
+    .place span {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #7a5168;
+    }
+
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(144, 45, 85, 0.4);
+      background: rgba(255, 255, 255, 0.85);
+      color: #912650;
+      font-weight: 600;
+      box-shadow: 0 3px 9px rgba(153, 75, 111, 0.15);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .map-link span.icon {
+      font-size: 1rem;
+    }
+
+    .map-link:hover,
+    .map-link:active {
+      transform: translateY(-1px);
+      background: rgba(255, 243, 252, 0.95);
+      box-shadow: 0 6px 14px rgba(138, 52, 94, 0.28);
+    }
+
+    footer {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 0.68rem;
+      color: #82536b;
+      opacity: 0.9;
+    }
+
+    @media (min-width: 600px) {
+      .card {
+        padding: 26px 28px 28px;
+      }
+      .header {
+        margin-bottom: 20px;
+      }
+      .names {
+        font-size: 2.1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <!-- Liquid background elements -->
+  <div class="blob"></div>
+  <div class="blob"></div>
+  <div class="blob"></div>
 
-<div class="card">
+  <main class="card">
+    <div class="accent-strip"></div>
 
-  <div class="date">JANUARY 10</div>
-  <div class="year">2025</div>
+    <header class="header">
+      <small>TOGETHER WITH OUR FAMILIES</small>
+      <div class="names">
+        Selbin <span class="ampersand">&amp;</span> Shalini
+      </div>
+      <div class="subtitle">Wedding Day Locations</div>
 
-  <div class="names">Selbin</div>
-  <div class="and">&</div>
-  <div class="names">Shalini</div>
+      <div class="date-tag">
+        <span>January 10</span>
+        <span>2025</span>
+      </div>
+    </header>
 
-  <div class="invite">
-    TOGETHER WITH OUR FAMILIES<br>
-    INVITE YOU TO<br>
-    CELEBRATE OUR WEDDING
-  </div>
+    <section class="venues">
+      <!-- Venue 1 -->
+      <article class="venue">
+        <div class="venue-label">Wedding Ceremony</div>
+        <div class="time">AT 10:00 AM</div>
+        <div class="place">
+          St. Sebastian's Church, Kannivayal
+          <span>Cherupuzha, Kerala</span>
+        </div>
+        <!-- Replace href with your exact Maps link if you have one -->
+        <a
+          class="map-link"
+          href="https://www.google.com/maps/search/?api=1&query=St.+Sebastian%27s+Church+Kannivayal"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="icon">📍</span>
+          <span>Open Ceremony Location</span>
+        </a>
+      </article>
 
-  <div class="section">
-    <div class="place">St. Sebastian's Church</div>
-    <div class="place">Kannivayal</div>
-    <div class="time">AT 10:00 AM</div>
+      <!-- Venue 2 -->
+      <article class="venue">
+        <div class="venue-label">Reception</div>
+        <div class="time">AT 12:30 PM</div>
+        <div class="place">
+          Vyabharabhavan Auditorium, Chittarikkal
+          <span>Kasaragod, Kerala</span>
+        </div>
+        <!-- Replace href with your exact Maps link if you have one -->
+        <a
+          class="map-link"
+          href="https://www.google.com/maps/search/?api=1&query=Vyabharabhavan+Auditorium+Chittarikkal"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="icon">📍</span>
+          <span>Open Reception Location</span>
+        </a>
+      </article>
+    </section>
 
-    <!-- ✅ LOCATION ADDED ONLY -->
-    <div class="location">
-      📍 <a href="https://www.google.com/maps/search/?api=1&query=St+Sebastian's+Church+Kannivayal" target="_blank">
-      Get Location
-      </a>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="place">Vyabharabhavan Auditorium</div>
-    <div class="place">Chittarikkal</div>
-    <div class="time">AT 12:30 PM</div>
-    <div class="place">Reception</div>
-
-    <!-- ✅ LOCATION ADDED ONLY -->
-    <div class="location">
-      📍 <a href="https://www.google.com/maps/search/?api=1&query=Vyabharabhavan+Auditorium+Chittarikkal" target="_blank">
-      Get Location
-      </a>
-    </div>
-  </div>
-
-</div>
-
+    <footer>
+      Kindly use the buttons above to navigate to each venue.
+    </footer>
+  </main>
 </body>
 </html>
