@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    /* Reset */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -64,18 +63,11 @@
     }
 
     @keyframes float {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-      50% {
-        transform: translate3d(30px, -10px, 0) scale(1.05);
-      }
-      100% {
-        transform: translate3d(-25px, 20px, 0) scale(1.02) rotate(3deg);
-      }
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(30px, -10px, 0) scale(1.05); }
+      100% { transform: translate3d(-25px, 20px, 0) scale(1.02) rotate(3deg); }
     }
 
-    /* Glass card */
     .card {
       width: 95%;
       max-width: 500px;
@@ -88,16 +80,6 @@
       position: relative;
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 1px solid rgba(217, 130, 180, 0.25);
-      pointer-events: none;
-      mix-blend-mode: soft-light;
-    }
-
     .accent-strip {
       position: absolute;
       left: 16px;
@@ -106,7 +88,6 @@
       width: 4px;
       border-radius: 999px;
       background: linear-gradient(180deg, #7e123b, #b52b6a);
-      opacity: 0.9;
     }
 
     .header {
@@ -116,26 +97,16 @@
     }
 
     .header small {
-      display: block;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       font-size: 0.68rem;
-      margin-bottom: 4px;
       color: #7a5168;
     }
 
     .names {
-      font-family: "Georgia", "Times New Roman", serif;
+      font-family: Georgia, serif;
       font-size: 1.9rem;
-      letter-spacing: 0.06em;
-      text-transform: capitalize;
-      margin-bottom: 2px;
-    }
-
-    .ampersand {
-      font-size: 1.7rem;
-      margin: 0 6px;
-      color: #9b1b53;
+      margin: 4px 0;
     }
 
     .subtitle {
@@ -149,59 +120,51 @@
     .date-tag {
       display: inline-flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
       padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(152, 57, 100, 0.12);
-      background: linear-gradient(135deg, rgba(255, 238, 246, 0.9), rgba(255, 255, 255, 0.9));
+      background: linear-gradient(135deg, #fff0f7, #ffffff);
       font-size: 0.7rem;
-      gap: 1px;
       margin-top: 6px;
     }
 
-    .date-tag span:first-child {
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #7a3b57;
-    }
-
     .date-tag span:last-child {
-      font-weight: 600;
       font-size: 0.9rem;
+      font-weight: 600;
       color: #9b1b53;
     }
 
-    /* Venue section */
+    /* Add to Calendar */
+    .calendar-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 9px 18px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffb6d5, #d98ac2);
+      color: #5a1233;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(150, 60, 100, 0.35);
+    }
+
     .venues {
       margin-top: 18px;
-      padding-top: 10px;
       border-top: 1px dashed rgba(170, 105, 137, 0.32);
+      padding-top: 12px;
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
 
     .venue {
-      padding: 10px 12px 12px;
+      padding: 12px;
       border-radius: 16px;
-      background: linear-gradient(135deg, rgba(255, 246, 252, 0.9), rgba(245, 228, 245, 0.9));
+      background: linear-gradient(135deg, #fff6fb, #f3e8ff);
       border: 1px solid rgba(196, 139, 169, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .venue::after {
-      content: "";
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      right: -60px;
-      top: -60px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9), rgba(223, 155, 189, 0.1));
-      opacity: 0.7;
-      pointer-events: none;
     }
 
     .venue-label {
@@ -209,57 +172,29 @@
       text-transform: uppercase;
       letter-spacing: 0.19em;
       color: #924063;
-      margin-bottom: 4px;
     }
 
     .time {
-      font-size: 0.9rem;
       font-weight: 600;
       color: #681333;
-      margin-bottom: 2px;
-    }
-
-    .place {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #3b1b2a;
     }
 
     .place span {
       display: block;
       font-size: 0.8rem;
-      font-weight: 400;
       color: #7a5168;
     }
 
     .map-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      display: inline-block;
       margin-top: 8px;
-      font-size: 0.8rem;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
       padding: 7px 12px;
+      font-size: 0.8rem;
       border-radius: 999px;
-      border: 1px solid rgba(144, 45, 85, 0.4);
-      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #912650;
+      text-decoration: none;
       color: #912650;
       font-weight: 600;
-      box-shadow: 0 3px 9px rgba(153, 75, 111, 0.15);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-    }
-
-    .map-link span.icon {
-      font-size: 1rem;
-    }
-
-    .map-link:hover,
-    .map-link:active {
-      transform: translateY(-1px);
-      background: rgba(255, 243, 252, 0.95);
-      box-shadow: 0 6px 14px rgba(138, 52, 94, 0.28);
     }
 
     footer {
@@ -267,89 +202,70 @@
       text-align: center;
       font-size: 0.68rem;
       color: #82536b;
-      opacity: 0.9;
-    }
-
-    @media (min-width: 600px) {
-      .card {
-        padding: 26px 28px 28px;
-      }
-      .header {
-        margin-bottom: 20px;
-      }
-      .names {
-        font-size: 2.1rem;
-      }
     }
   </style>
 </head>
+
 <body>
-  <!-- Liquid background elements -->
-  <div class="blob"></div>
-  <div class="blob"></div>
-  <div class="blob"></div>
 
-  <main class="card">
-    <div class="accent-strip"></div>
+<div class="blob"></div>
+<div class="blob"></div>
+<div class="blob"></div>
 
-    <header class="header">
-      <small>TOGETHER WITH OUR FAMILIES</small>
-      <div class="names">
-        Selbin <span class="ampersand">&amp;</span> Shalini
+<main class="card">
+  <div class="accent-strip"></div>
+
+  <header class="header">
+    <small>TOGETHER WITH OUR FAMILIES</small>
+    <div class="names">Selbin & Shalini</div>
+    <div class="subtitle">Wedding Day Locations</div>
+
+    <div class="date-tag">
+      <span>January 10</span>
+      <span>2026</span>
+    </div>
+
+    <a class="calendar-btn"
+      href="https://www.google.com/calendar/render?action=TEMPLATE&text=Selbin+%26+Shalini+Wedding&dates=20260110T043000Z/20260110T073000Z&details=Wedding+Ceremony+and+Reception&location=Kasaragod,+Kerala"
+      target="_blank">
+      📅 Add to Calendar
+    </a>
+  </header>
+
+  <section class="venues">
+
+    <article class="venue">
+      <div class="venue-label">Wedding Ceremony</div>
+      <div class="time">10:00 AM</div>
+      <div class="place">
+        St. Sebastian's Church, Kannivayal
+        <span>Kasaragod, Kerala</span>
       </div>
-      <div class="subtitle">Wedding Day Locations</div>
+      <a class="map-link" target="_blank"
+        href="https://maps.app.goo.gl/n1TwXUCyUEHs9cx98?g_st=ac">
+        📍 Open Ceremony Location
+      </a>
+    </article>
 
-      <div class="date-tag">
-        <span>January 10</span>
-        <span>2026</span>
+    <article class="venue">
+      <div class="venue-label">Reception</div>
+      <div class="time">12:30 PM</div>
+      <div class="place">
+        Vyabharabhavan Auditorium, Chittarikkal
+        <span>Kasaragod, Kerala</span>
       </div>
-    </header>
+      <a class="map-link" target="_blank"
+        href="https://maps.app.goo.gl/wjij1A8URrHU4UtDA?g_st=ac">
+        📍 Open Reception Location
+      </a>
+    </article>
 
-    <section class="venues">
-      <!-- Venue 1 -->
-      <article class="venue">
-        <div class="venue-label">Wedding Ceremony</div>
-        <div class="time">AT 10:00 AM</div>
-        <div class="place">
-          St. Sebastian's Church, Kannivayal
-          <span>Kasaragod, Kerala</span>
-        </div>
-        <!-- Replace href with your exact Maps link if you have one -->
-        <a
-          class="map-link"
-          href="https://maps.app.goo.gl/n1TwXUCyUEHs9cx98?g_st=ac"
-          target="_blank"
-          rel="noopener"
-        >
-          <span class="icon">📍</span>
-          <span>Open Ceremony Location</span>
-        </a>
-      </article>
+  </section>
 
-      <!-- Venue 2 -->
-      <article class="venue">
-        <div class="venue-label">Reception</div>
-        <div class="time">AT 12:30 PM</div>
-        <div class="place">
-          Vyabharabhavan Auditorium, Chittarikkal
-          <span>Kasaragod, Kerala</span>
-        </div>
-        <!-- Replace href with your exact Maps link if you have one -->
-        <a
-          class="map-link"
-          href="https://maps.app.goo.gl/wjij1A8URrHU4UtDA?g_st=ac"
-          target="_blank"
-          rel="noopener"
-        >
-          <span class="icon">📍</span>
-          <span>Open Reception Location</span>
-        </a>
-      </article>
-    </section>
+  <footer>
+    Kindly use the buttons above to navigate to each venue.
+  </footer>
+</main>
 
-    <footer>
-      Kindly use the buttons above to navigate to each venue.
-    </footer>
-  </main>
 </body>
 </html>
