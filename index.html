@@ -73,7 +73,7 @@
       max-width: 500px;
       background: rgba(255, 255, 255, 0.78);
       border-radius: 24px;
-      padding: 24px 20px 26px;
+      padding: 24px 20px 30px;
       box-shadow: 0 18px 45px rgba(116, 63, 92, 0.20);
       border: 1px solid rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(16px) saturate(140%);
@@ -133,7 +133,6 @@
       color: #9b1b53;
     }
 
-    /* Add to Calendar */
     .calendar-btn {
       display: inline-flex;
       align-items: center;
@@ -197,8 +196,30 @@
       font-weight: 600;
     }
 
+    /* Photo section */
+    .photo-section {
+      margin-top: 26px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    .photo-section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .photo-section img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(120, 60, 100, 0.35);
+      border: 1px solid rgba(255,255,255,0.8);
+    }
+
     footer {
-      margin-top: 14px;
+      margin-top: 16px;
       text-align: center;
       font-size: 0.68rem;
       color: #82536b;
@@ -225,7 +246,11 @@
       <span>2026</span>
     </div>
 
-    
+    <a class="calendar-btn"
+      href="https://www.google.com/calendar/render?action=TEMPLATE&text=Selbin+%26+Shalini+Wedding&dates=20260110T043000Z/20260110T073000Z&details=Wedding+Ceremony+and+Reception&location=Kasaragod,+Kerala"
+      target="_blank">
+      📅 Add to Calendar
+    </a>
   </header>
 
   <section class="venues">
@@ -258,17 +283,29 @@
 
   </section>
 
+  <!-- PHOTO ON SCROLL -->
+  <section class="photo-section" id="photo">
+    <img src="photo2.jpg" alt="Wedding Photo">
+  </section>
+
   <footer>
     Kindly use the buttons above to navigate to each venue.
   </footer>
-  
-  <a class="calendar-btn"
-      href="https://www.google.com/calendar/render?action=TEMPLATE&text=Selbin+%26+Shalini+Wedding&dates=20260110T043000Z/20260110T073000Z&details=Wedding+Ceremony+and+Reception&location=Kasaragod,+Kerala"
-      target="_blank">
-      📅 Add to Calendar
-  </a>
-  
 </main>
+
+<script>
+  // Scroll reveal for photo
+  const photo = document.getElementById("photo");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        photo.classList.add("show");
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(photo);
+</script>
 
 </body>
 </html>
