@@ -23,14 +23,14 @@ body{
   filter:blur(6px);
   opacity:.55;
   z-index:-1;
-  animation:float 26s infinite alternate ease-in-out;
+  animation:float 28s infinite alternate ease-in-out;
 }
 .blob.one{background:#ff9fbf;top:-120px;left:-120px}
 .blob.two{background:#d7a4ff;bottom:-160px;right:-120px}
 
 @keyframes float{
-  0%{transform:translate(0,0)}
-  100%{transform:translate(40px,-30px)}
+  from{transform:translate(0,0)}
+  to{transform:translate(40px,-30px)}
 }
 
 /* Page wrapper */
@@ -76,7 +76,6 @@ body{
   text-transform:uppercase;
   color:#9b5a7a;
 }
-
 .date{
   margin-top:6px;
   font-weight:600;
@@ -140,26 +139,28 @@ body{
   font-weight:600;
 }
 
-/* PHOTO SECTION (SEPARATE FROM CARD) */
+/* PHOTO SECTION – PORTRAIT FRIENDLY */
 .photos{
   margin-top:40px;
   display:flex;
   flex-direction:column;
-  gap:28px;
+  gap:30px;
 }
 
 .photo{
-  height:340px;
+  width:100%;
+  aspect-ratio:3/4;          /* Perfect for vertical photos */
   border-radius:22px;
   overflow:hidden;
   position:relative;
+  background:linear-gradient(135deg,#fff6fb,#f3e8ff);
   box-shadow:0 22px 50px rgba(120,60,100,.35);
 }
 
 .photo img{
   width:100%;
-  height:120%;
-  object-fit:cover;
+  height:100%;
+  object-fit:contain;        /* NO CROPPING */
   position:absolute;
   top:0;left:0;
   will-change:transform;
@@ -167,7 +168,7 @@ body{
 
 /* Footer */
 footer{
-  margin-top:30px;
+  margin-top:32px;
   text-align:center;
   font-size:.68rem;
   color:#82536b;
@@ -218,11 +219,11 @@ footer{
     </div>
   </div>
 
-  <!-- PARALLAX PHOTOS (AFTER CARD) -->
+  <!-- PHOTOS (AFTER CARD) -->
   <section class="photos">
-    <div class="photo"><img src="photo2.jpg"></div>
-    <div class="photo"><img src="photo3.jpg"></div>
-    <div class="photo"><img src="photo4.jpg"></div>
+    <div class="photo"><img src="photo2.jpg" alt="Couple Photo 1"></div>
+    <div class="photo"><img src="photo3.jpg" alt="Couple Photo 2"></div>
+    <div class="photo"><img src="photo4.jpg" alt="Couple Photo 3"></div>
   </section>
 
   <footer>
@@ -232,14 +233,15 @@ footer{
 </div>
 
 <script>
-const photos=document.querySelectorAll(".photo img");
+const images=document.querySelectorAll(".photo img");
 
 window.addEventListener("scroll",()=>{
-  photos.forEach(img=>{
+  images.forEach(img=>{
     const rect=img.parentElement.getBoundingClientRect();
-    const windowH=window.innerHeight;
-    if(rect.top<windowH && rect.bottom>0){
-      const offset=(windowH-rect.top)*0.18;
+    const winH=window.innerHeight;
+
+    if(rect.top<winH && rect.bottom>0){
+      const offset=(winH-rect.top)*0.06; // subtle parallax
       img.style.transform=`translateY(${offset}px)`;
     }
   });
