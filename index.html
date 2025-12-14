@@ -1,249 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Selbin & Shalini - Wedding Locations</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<title>Selbin & Shalini – Wedding</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at top, #ffeaf4 0, #fdf7ff 40%, #f3f0ff 100%);
-      overflow-x: hidden;
-      color: #3b1b2a;
-      position: relative;
-    }
+body{
+  font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:radial-gradient(circle at top,#ffeaf4,#fdf7ff,#f3f0ff);
+  color:#3b1b2a;
+  overflow-x:hidden;
+}
 
-    /* Liquid blobs */
-    .blob {
-      position: fixed;
-      border-radius: 40% 60% 65% 35%;
-      filter: blur(2px);
-      opacity: 0.55;
-      mix-blend-mode: multiply;
-      pointer-events: none;
-      z-index: -2;
-      animation: float 22s ease-in-out infinite alternate;
-    }
+/* Liquid background */
+.blob{
+  position:fixed;
+  width:420px;height:420px;
+  border-radius:40% 60% 65% 35%;
+  filter:blur(6px);
+  opacity:.55;
+  z-index:-1;
+  animation:float 26s infinite alternate ease-in-out;
+}
+.blob.one{background:#ff9fbf;top:-120px;left:-120px}
+.blob.two{background:#d7a4ff;bottom:-160px;right:-120px}
 
-    .blob:nth-child(1) {
-      width: 420px;
-      height: 420px;
-      top: -120px;
-      left: -120px;
-      background: radial-gradient(circle at 30% 20%, #ff9fbf, #d5679d);
-    }
+@keyframes float{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(40px,-30px)}
+}
 
-    .blob:nth-child(2) {
-      width: 420px;
-      height: 420px;
-      bottom: -160px;
-      right: -120px;
-      background: radial-gradient(circle at 70% 80%, #ffd6e8, #c06fe3);
-      animation-duration: 26s;
-    }
+/* Page wrapper */
+.page{
+  max-width:520px;
+  margin:0 auto;
+  padding:24px 16px 60px;
+}
 
-    .blob:nth-child(3) {
-      width: 360px;
-      height: 360px;
-      top: 40%;
-      left: 55%;
-      background: radial-gradient(circle at 30% 70%, #ffe8f3, #ffb6c9);
-      animation-duration: 30s;
-    }
+/* MAIN CARD */
+.card{
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(16px);
+  border-radius:24px;
+  padding:26px 22px 28px;
+  box-shadow:0 20px 50px rgba(120,60,100,.25);
+  border:1px solid rgba(255,255,255,.9);
+  position:relative;
+}
 
-    @keyframes float {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      50% { transform: translate3d(30px, -10px, 0) scale(1.05); }
-      100% { transform: translate3d(-25px, 20px, 0) scale(1.02) rotate(3deg); }
-    }
+.accent{
+  position:absolute;
+  left:14px;top:14px;bottom:14px;
+  width:4px;border-radius:999px;
+  background:linear-gradient(180deg,#7e123b,#b52b6a);
+}
 
-    .card {
-      width: 95%;
-      max-width: 500px;
-      background: rgba(255, 255, 255, 0.78);
-      border-radius: 24px;
-      padding: 24px 20px 34px;
-      box-shadow: 0 18px 45px rgba(116, 63, 92, 0.20);
-      backdrop-filter: blur(16px);
-      position: relative;
-    }
+.header{text-align:center;margin-bottom:18px}
+.header small{
+  letter-spacing:.18em;
+  font-size:.68rem;
+  text-transform:uppercase;
+  color:#7a5168;
+}
+.names{
+  font-family:Georgia,serif;
+  font-size:2rem;
+  margin:6px 0;
+}
+.subtitle{
+  font-size:.8rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#9b5a7a;
+}
 
-    .accent-strip {
-      position: absolute;
-      left: 16px;
-      top: 10px;
-      bottom: 10px;
-      width: 4px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #7e123b, #b52b6a);
-    }
+.date{
+  margin-top:6px;
+  font-weight:600;
+  color:#9b1b53;
+}
 
-    .header {
-      text-align: center;
-      margin-bottom: 18px;
-    }
+/* Calendar button */
+.calendar-btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 20px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ffb6d5,#d98ac2);
+  color:#5a1233;
+  text-decoration:none;
+  font-size:.75rem;
+  letter-spacing:.16em;
+  font-weight:700;
+}
 
-    .names {
-      font-family: Georgia, serif;
-      font-size: 1.9rem;
-    }
+/* Venues */
+.venues{
+  margin-top:20px;
+  padding-top:14px;
+  border-top:1px dashed rgba(170,105,137,.35);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
 
-    .subtitle {
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #9b5a7a;
-    }
+.venue{
+  background:linear-gradient(135deg,#fff6fb,#f3e8ff);
+  border-radius:16px;
+  padding:14px;
+  border:1px solid rgba(196,139,169,.3);
+}
+.venue small{
+  font-size:.7rem;
+  letter-spacing:.18em;
+  color:#924063;
+}
+.venue .time{
+  font-weight:600;
+  margin:4px 0;
+}
+.venue span{
+  display:block;
+  font-size:.8rem;
+  color:#7a5168;
+}
 
-    .date-tag {
-      margin-top: 6px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #9b1b53;
-    }
+.map{
+  display:inline-block;
+  margin-top:8px;
+  padding:7px 14px;
+  font-size:.75rem;
+  border-radius:999px;
+  border:1px solid #912650;
+  text-decoration:none;
+  color:#912650;
+  font-weight:600;
+}
 
-    .calendar-btn {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 9px 18px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #ffb6d5, #d98ac2);
-      color: #5a1233;
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
-      font-weight: 700;
-    }
+/* PHOTO SECTION (SEPARATE FROM CARD) */
+.photos{
+  margin-top:40px;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
 
-    .venues {
-      margin-top: 20px;
-      border-top: 1px dashed rgba(170, 105, 137, 0.32);
-      padding-top: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+.photo{
+  height:340px;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 22px 50px rgba(120,60,100,.35);
+}
 
-    .venue {
-      padding: 12px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #fff6fb, #f3e8ff);
-    }
+.photo img{
+  width:100%;
+  height:120%;
+  object-fit:cover;
+  position:absolute;
+  top:0;left:0;
+  will-change:transform;
+}
 
-    .map-link {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 6px 12px;
-      font-size: 0.75rem;
-      border-radius: 999px;
-      border: 1px solid #912650;
-      color: #912650;
-      text-decoration: none;
-    }
-
-    /* Parallax photo section */
-    .photo-wrapper {
-      margin-top: 30px;
-      height: 320px;
-      overflow: hidden;
-      border-radius: 20px;
-      position: relative;
-      box-shadow: 0 20px 45px rgba(120,60,100,.35);
-    }
-
-    .photo-wrapper img {
-      width: 100%;
-      height: 120%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform: translateY(0);
-      transition: opacity 1s ease;
-      will-change: transform;
-    }
-
-    footer {
-      margin-top: 16px;
-      text-align: center;
-      font-size: 0.68rem;
-      color: #82536b;
-    }
-  </style>
+/* Footer */
+footer{
+  margin-top:30px;
+  text-align:center;
+  font-size:.68rem;
+  color:#82536b;
+}
+</style>
 </head>
 
 <body>
 
-<div class="blob"></div>
-<div class="blob"></div>
-<div class="blob"></div>
+<div class="blob one"></div>
+<div class="blob two"></div>
 
-<main class="card">
-  <div class="accent-strip"></div>
+<div class="page">
 
-  <header class="header">
-    <div class="names">Selbin & Shalini</div>
-    <div class="subtitle">Wedding Day Locations</div>
-    <div class="date-tag">January 10, 2026</div>
+  <!-- SINGLE CARD -->
+  <div class="card">
+    <div class="accent"></div>
 
-    <a class="calendar-btn"
-       href="https://www.google.com/calendar/render?action=TEMPLATE&text=Selbin+%26+Shalini+Wedding&dates=20260110T043000Z/20260110T073000Z"
-       target="_blank">
-      📅 Add to Calendar
-    </a>
-  </header>
+    <div class="header">
+      <small>Together With Our Families</small>
+      <div class="names">Selbin & Shalini</div>
+      <div class="subtitle">Wedding Day Locations</div>
+      <div class="date">January 10, 2026</div>
 
-  <section class="venues">
-    <div class="venue">
-      <strong>Wedding Ceremony</strong><br>
-      10:00 AM<br>
-      St. Sebastian's Church, Kannivayal
-      <br>
-      <a class="map-link" href="https://maps.app.goo.gl/n1TwXUCyUEHs9cx98" target="_blank">📍 Map</a>
+      <a class="calendar-btn"
+        href="https://www.google.com/calendar/render?action=TEMPLATE&text=Selbin+%26+Shalini+Wedding&dates=20260110T043000Z/20260110T073000Z&location=Kasaragod,+Kerala"
+        target="_blank">
+        📅 Add to Calendar
+      </a>
     </div>
 
-    <div class="venue">
-      <strong>Reception</strong><br>
-      12:30 PM<br>
-      Vyabharabhavan Auditorium, Chittarikkal
-      <br>
-      <a class="map-link" href="https://maps.app.goo.gl/wjij1A8URrHU4UtDA" target="_blank">📍 Map</a>
-    </div>
-  </section>
+    <div class="venues">
+      <div class="venue">
+        <small>Wedding Ceremony</small>
+        <div class="time">10:00 AM</div>
+        St. Sebastian's Church, Kannivayal
+        <span>Kasaragod, Kerala</span>
+        <a class="map" href="https://maps.app.goo.gl/n1TwXUCyUEHs9cx98" target="_blank">📍 Map</a>
+      </div>
 
-  <!-- PARALLAX IMAGE -->
-  <div class="photo-wrapper">
-    <img src="photo2.jpg" id="parallaxImg" alt="Wedding Photo">
+      <div class="venue">
+        <small>Reception</small>
+        <div class="time">12:30 PM</div>
+        Vyabharabhavan Auditorium, Chittarikkal
+        <span>Kasaragod, Kerala</span>
+        <a class="map" href="https://maps.app.goo.gl/wjij1A8URrHU4UtDA" target="_blank">📍 Map</a>
+      </div>
+    </div>
   </div>
 
+  <!-- PARALLAX PHOTOS (AFTER CARD) -->
+  <section class="photos">
+    <div class="photo"><img src="photo2.jpg"></div>
+    <div class="photo"><img src="photo3.jpg"></div>
+    <div class="photo"><img src="photo4.jpg"></div>
+  </section>
+
   <footer>
-    Kindly use the buttons above to navigate to each venue.
+    We look forward to celebrating with you
   </footer>
-</main>
+
+</div>
 
 <script>
-  const img = document.getElementById("parallaxImg");
+const photos=document.querySelectorAll(".photo img");
 
-  window.addEventListener("scroll", () => {
-    const rect = img.parentElement.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-
-    if (rect.top < windowHeight && rect.bottom > 0) {
-      const offset = (windowHeight - rect.top) * 0.15;
-      img.style.transform = `translateY(${offset}px)`;
+window.addEventListener("scroll",()=>{
+  photos.forEach(img=>{
+    const rect=img.parentElement.getBoundingClientRect();
+    const windowH=window.innerHeight;
+    if(rect.top<windowH && rect.bottom>0){
+      const offset=(windowH-rect.top)*0.18;
+      img.style.transform=`translateY(${offset}px)`;
     }
   });
+});
 </script>
 
 </body>
